@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Chip } from "../../components/common/Chip";
 import { mockCafes } from "../../data/mockCafes";
 import { AiChatInput } from "../../features/ai/AiChatInput";
 import { AiMessageBubble } from "../../features/ai/AiMessageBubble";
@@ -20,14 +19,19 @@ type ChatMessage =
       followUps: string[];
     };
 
-const followUpOptions = ["더 조용한 곳", "창가 자리 있는 곳", "다른 동네", "작업하기 좋은 곳"];
+const followUpOptions = [
+  "더 조용한 곳",
+  "창가 자리 있는 곳",
+  "다른 동네",
+  "작업하기 좋은 곳",
+];
 
 function pickRecommendation(message: string) {
   if (message.includes("작업") || message.includes("집중")) {
     return mockCafes.find((cafe) => cafe.id === "cafe-007") ?? mockCafes[0];
   }
 
-  if (message.includes("조용") || message.includes("따뜻")) {
+  if (message.includes("조용") || message.includes("여유")) {
     return mockCafes.find((cafe) => cafe.id === "cafe-006") ?? mockCafes[0];
   }
 
@@ -70,7 +74,7 @@ export function AiPage() {
         id: `assistant-${timestamp}`,
         role: "assistant",
         content:
-          "말씀하신 분위기와 선택한 무드 태그를 같이 봤어요. 지금은 이 공간이 가장 잘 맞아 보여요.",
+          "말씀하신 분위기와 선택한 무드 태그를 함께 보았어요. 지금은 이 공간이 가장 잘 맞아 보여요.",
       },
       {
         id: `recommendation-${timestamp}`,

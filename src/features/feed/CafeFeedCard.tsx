@@ -17,7 +17,7 @@ export function CafeFeedCard({
   onToggleSave,
 }: CafeFeedCardProps) {
   return (
-    <article className="overflow-hidden rounded-[28px] bg-surface shadow-card">
+    <article className="overflow-hidden rounded-[28px] bg-surface shadow-card transition-shadow duration-200 hover:shadow-bottom-sheet">
       <div
         role="button"
         tabIndex={0}
@@ -66,7 +66,7 @@ export function CafeFeedCard({
               <span>·</span>
               <span>{cafe.distance}</span>
               <span>·</span>
-              <span>{cafe.isOpen ? "영업중" : "영업 전"}</span>
+              <span>{cafe.isOpen ? "영업중" : "영업 종료"}</span>
             </div>
           </div>
         </div>

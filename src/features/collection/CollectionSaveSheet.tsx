@@ -26,7 +26,7 @@ export function CollectionSaveSheet({
   const hasCollections = collections.length > 0;
 
   const handleCreate = () => {
-    onCreateCollection(newCollectionName || "가보고 싶은 공간");
+    onCreateCollection(newCollectionName.trim() || "가보고 싶은 공간");
     setNewCollectionName("");
     setCreating(false);
   };
@@ -60,7 +60,7 @@ export function CollectionSaveSheet({
           <div className="rounded-[20px] bg-surface-muted p-4 text-center">
             <FolderPlus className="mx-auto text-primary" size={28} />
             <p className="mt-3 text-base font-bold text-espresso-900">
-              아직 컬렉션이 없어요
+              아직 컬렉션이 없어요.
             </p>
             <p className="mt-1 text-sm leading-6 text-muted-foreground">
               새 컬렉션을 만들고 이 카페를 바로 저장할 수 있어요.

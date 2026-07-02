@@ -49,7 +49,6 @@ export function CollectionPage() {
 
   const handleVisitFeedback = (cafeId: string) => {
     const cafe = savedCafes.find((item) => item.id === cafeId);
-
     if (!cafe) return;
 
     setFeedbackCafe(cafe);
@@ -118,7 +117,12 @@ export function CollectionPage() {
               placeholder="예: 조용히 작업하기 좋은 곳"
               className="h-12 w-full rounded-2xl border border-border bg-surface px-4 text-[15px] text-foreground outline-none placeholder:text-muted-foreground focus:border-secondary"
             />
-            <Button className="w-full" size="lg" onClick={handleCreateCollection}>
+            <Button
+              className="w-full"
+              size="lg"
+              disabled={!newCollectionName.trim()}
+              onClick={handleCreateCollection}
+            >
               생성하기
             </Button>
           </div>

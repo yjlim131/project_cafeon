@@ -2,10 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/common/Button";
 import { Toast } from "../../components/common/Toast";
-import {
-  useMockAuth,
-  type MockAuthProvider,
-} from "../../hooks/useMockAuth";
+import { useMockAuth, type MockAuthProvider } from "../../hooks/useMockAuth";
 import { cn } from "../../utils/cn";
 
 const loginProviders: Array<{
@@ -67,108 +64,66 @@ export function LoginPage() {
   };
 
   return (
-    <div
-      className="bg-cream-200"
-      style={{ height: "100dvh", maxHeight: "100dvh", overflow: "hidden" }}
-    >
-      <main
-        className="mx-auto flex max-w-[430px] flex-col overflow-hidden bg-background text-foreground"
-        style={{ height: "100dvh", maxHeight: "100dvh" }}
-      >
-        <section
-          className="relative shrink-0 overflow-hidden"
-          style={{ height: "min(34dvh, 285px)" }}
-        >
+    <div className="h-[100dvh] max-h-[100dvh] overflow-hidden bg-cream-200">
+      <main className="mx-auto flex h-[100dvh] max-h-[100dvh] max-w-[430px] flex-col overflow-hidden bg-background text-foreground">
+        <section className="relative h-[31dvh] max-h-[248px] min-h-[210px] shrink-0 overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1511081692775-05d0f180a065?auto=format&fit=crop&w=900&q=80"
-            alt="따뜻한 카페 공간"
+            alt="여유로운 카페 공간"
             className="h-full w-full object-cover"
-            style={{ objectPosition: "center 46%" }}
+            style={{ objectPosition: "center 48%" }}
           />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(43,30,22,0.06) 0%, rgba(250,248,245,0.10) 48%, rgba(250,248,245,0.96) 100%)",
-            }}
-          />
-          <div
-            className="absolute inset-x-0 bottom-0"
-            style={{
-              height: 96,
-              background:
-                "linear-gradient(180deg, rgba(250,248,245,0) 0%, hsl(var(--background)) 90%)",
-            }}
-          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(43,30,22,0.04)_0%,rgba(250,248,245,0.22)_52%,rgba(250,248,245,0.98)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(250,248,245,0)_0%,hsl(var(--background))_92%)]" />
         </section>
 
-        <section
-          className="relative -mt-7 flex min-h-0 flex-1 flex-col rounded-t-[30px] bg-background px-6"
-          style={{
-            paddingTop: 42,
-            paddingBottom: "max(18px, env(safe-area-inset-bottom))",
-            rowGap: 24,
-          }}
-        >
-          <div className="text-center">
-            <h1
-              className="font-bold text-espresso-900"
-              style={{ fontSize: 31, lineHeight: "39px" }}
-            >
-              당신의 감성을 깨우는 공간,
+        <section className="relative -mt-7 flex min-h-0 flex-1 flex-col rounded-t-[30px] bg-background px-6 pb-[max(18px,env(safe-area-inset-bottom))] pt-10">
+          <div className="flex flex-1 flex-col justify-between gap-6">
+            <div className="space-y-4 text-center">
+              <h1 className="text-[34px] font-extrabold leading-[42px] text-espresso-900">
+                당신의 감성을 깨우는 공간,
+                <br />
+                CafeOn 시작하기
+              </h1>
+              <p className="text-[15px] font-medium leading-6 text-muted-foreground">
+                취향이 묻어나는 조용한 카페부터
+                <br />
+                영감을 주는 감각적인 공간까지 만나보세요.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              {loginProviders.map((provider) => {
+                const loading = loadingProvider === provider.id;
+                const disabled = Boolean(loadingProvider);
+
+                return (
+                  <Button
+                    key={provider.id}
+                    className={cn(
+                      "h-[58px] w-full border text-[16px] font-bold",
+                      provider.className,
+                    )}
+                    size="lg"
+                    variant="outline"
+                    disabled={disabled}
+                    onClick={() => handleLogin(provider.id)}
+                  >
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-surface/80 text-xs font-extrabold text-espresso-800">
+                      {provider.icon}
+                    </span>
+                    {loading ? "로그인 중..." : provider.label}
+                  </Button>
+                );
+              })}
+            </div>
+
+            <p className="text-center text-[11px] font-medium leading-[17px] text-muted-foreground">
+              계속하기를 누르면 CafeOn의 이용약관과
               <br />
-              CafeOn 시작하기
-            </h1>
-            <p
-              className="mt-4 text-muted-foreground"
-              style={{ fontSize: 16, lineHeight: "20px" }}
-            >
-              취향이 묻어나는 조용한 카페부터
-              <br />
-              영감을 주는 감각적인 공간까지 만나보세요.
+              개인정보 처리방침에 동의한 것으로 간주됩니다.
             </p>
           </div>
-
-          <div className="flex flex-col" style={{ gap: 14 }}>
-            {loginProviders.map((provider) => {
-              const loading = loadingProvider === provider.id;
-              const disabled = Boolean(loadingProvider);
-
-              return (
-                <Button
-                  key={provider.id}
-                  className={cn(
-                    "w-full border",
-                    provider.className,
-                  )}
-                  style={{
-                    height: 50,
-                    minHeight: 50,
-                    borderRadius: 16,
-                    fontSize: 15,
-                  }}
-                  size="lg"
-                  variant="outline"
-                  disabled={disabled}
-                  onClick={() => handleLogin(provider.id)}
-                >
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-surface/80 text-xs font-extrabold text-espresso-800">
-                    {provider.icon}
-                  </span>
-                  {loading ? "로그인 중..." : provider.label}
-                </Button>
-              );
-            })}
-          </div>
-
-          <p
-            className="mt-auto text-center text-muted-foreground"
-            style={{ fontSize: 12, lineHeight: "13px"}}
-          >
-            계속하기를 누르면 CafeOn의 이용약관과
-            <br />
-            개인정보 처리방침에 동의한 것으로 간주됩니다.
-          </p>
         </section>
       </main>
 

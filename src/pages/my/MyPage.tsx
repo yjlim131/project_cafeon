@@ -1,5 +1,4 @@
 import { Bell, FileText, Megaphone } from "lucide-react";
-import { Badge } from "../../components/common/Badge";
 import { mockCafes } from "../../data/mockCafes";
 import { mockUser } from "../../data/mockUser";
 import { MyMoodTags } from "../../features/my/MyMoodTags";

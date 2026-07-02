@@ -56,6 +56,7 @@ export function HomePage() {
     createCollectionAndSave,
     removeCafe,
   } = useCollection();
+
   const selectedNeighborhoods = useMemo(() => getStoredNeighborhoods(), []);
   const selectedCafe = useMemo(
     () => mockCafes.find((cafe) => cafe.id === selectedCafeId),
@@ -66,11 +67,10 @@ export function HomePage() {
     const selectedIds = getStoredMoodIds();
     const preferredIds =
       selectedIds.length > 0 ? selectedIds : mockUser.selectedMoodCategoryIds;
-    const selectedCategories = mockMoodCategories.filter((category) =>
+
+    return mockMoodCategories.filter((category) =>
       preferredIds.includes(category.id),
     );
-
-    return selectedCategories;
   }, []);
 
   const filteredCafes = useMemo(() => {
@@ -103,7 +103,6 @@ export function HomePage() {
 
   return (
     <section className="page-x">
-      
       <div className="mt-3">
         <ContextBanner />
       </div>
