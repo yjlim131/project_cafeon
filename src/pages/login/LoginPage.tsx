@@ -80,7 +80,7 @@ export function LoginPage() {
         <section className="relative -mt-7 flex min-h-0 flex-1 flex-col rounded-t-[30px] bg-background px-6 pb-[max(18px,env(safe-area-inset-bottom))] pt-10">
           <div className="flex flex-1 flex-col justify-between gap-6">
             <div className="space-y-4 text-center">
-              <h1 className="text-[34px] font-extrabold leading-[42px] text-espresso-900">
+              <h1 className="text-[30px] font-extrabold leading-[42px] text-espresso-900">
                 당신의 감성을 깨우는 공간,
                 <br />
                 CafeOn 시작하기
