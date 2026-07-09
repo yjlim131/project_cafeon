@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import { MapPin, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../components/common/Button";
@@ -6,16 +6,7 @@ import { Card } from "../../components/common/Card";
 import { Chip } from "../../components/common/Chip";
 
 const MAX_NEIGHBORHOODS = 3;
-const neighborhoodOptions = [
-  "성수동",
-  "연남동",
-  "망원동",
-  "합정동",
-  "을지로",
-  "한남동",
-  "해방촌",
-  "서촌",
-];
+const neighborhoodOptions = ["성수동", "연남동", "망원동", "한남동", "서촌"];
 
 type NeighborhoodLocationState = {
   selectedMoodCategoryIds?: string[];
@@ -40,6 +31,7 @@ export function NeighborhoodSetupPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as NeighborhoodLocationState | null;
+  const [searchValue, setSearchValue] = useState("");
   const [selectedNeighborhoods, setSelectedNeighborhoods] = useState<string[]>(
     [],
   );
@@ -109,7 +101,19 @@ export function NeighborhoodSetupPage() {
             </div>
           </Card>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-6">
+            <div className="flex h-[52px] items-center gap-3 rounded-[18px] border border-border bg-surface px-4 shadow-card">
+              <Search size={18} className="shrink-0 text-muted-foreground" />
+              <input
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
+                placeholder="동네를 검색해주세요."
+                className="h-full min-w-0 flex-1 bg-transparent text-[15px] text-foreground outline-none placeholder:text-muted-foreground"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
             {neighborhoodOptions.map((neighborhood) => (
               <button
                 key={neighborhood}

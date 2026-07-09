@@ -10,24 +10,28 @@ const loginProviders: Array<{
   label: string;
   icon: string;
   className: string;
+  iconClassName: string;
 }> = [
   {
     id: "kakao",
     label: "카카오로 시작하기",
     icon: "K",
     className: "border-transparent bg-[#FEE500] text-[#2B1E16] shadow-card",
+    iconClassName: "bg-surface/80 text-[#2B1E16]",
   },
   {
     id: "naver",
     label: "네이버로 시작하기",
     icon: "N",
-    className: "border-border bg-surface text-espresso-800",
+    className: "border-transparent bg-[#03C75A] text-white shadow-card",
+    iconClassName: "bg-white/20 text-white",
   },
   {
     id: "google",
     label: "Google 계정으로 시작하기",
     icon: "G",
     className: "border-border bg-surface text-espresso-800",
+    iconClassName: "bg-surface/80 text-espresso-800",
   },
 ];
 
@@ -109,7 +113,12 @@ export function LoginPage() {
                     disabled={disabled}
                     onClick={() => handleLogin(provider.id)}
                   >
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-surface/80 text-xs font-extrabold text-espresso-800">
+                    <span
+                      className={cn(
+                        "flex h-6 w-6 items-center justify-center rounded-full text-xs font-extrabold",
+                        provider.iconClassName,
+                      )}
+                    >
                       {provider.icon}
                     </span>
                     {loading ? "로그인 중..." : provider.label}

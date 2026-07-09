@@ -79,16 +79,63 @@ export function CollectionPage() {
         </Button>
       </div>
 
+      {collections.length > 0 ? (
+        <section className="mt-6 space-y-3">
+          <h2 className="text-base font-bold text-espresso-900">
+            내 컬렉션
+          </h2>
+          <div className="space-y-2">
+            {collections.map((collection) => (
+              <div
+                key={collection.id}
+                className="rounded-[22px] border border-border bg-surface p-4 shadow-card"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-surface-muted text-primary">
+                    <FolderPlus size={20} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-base font-bold text-espresso-900">
+                      {collection.name}
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {collection.cafeIds.length}개의 카페
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
       {savedCafes.length > 0 ? (
-        <CollectionGrid
-          cafes={savedCafes}
-          onCardClick={(cafeId) => navigate(`/cafe/${cafeId}`)}
-          onToggleSave={handleToggleSave}
-          canEnterFeedback={canEnterFeedback}
-          onVisitFeedback={handleVisitFeedback}
-        />
-      ) : (
+        <section className="mt-7">
+          <h2 className="text-base font-bold text-espresso-900">
+            저장한 카페
+          </h2>
+          <CollectionGrid
+            cafes={savedCafes}
+            onCardClick={(cafeId) => navigate(`/cafe/${cafeId}`)}
+            onToggleSave={handleToggleSave}
+            canEnterFeedback={canEnterFeedback}
+            onVisitFeedback={handleVisitFeedback}
+          />
+        </section>
+      ) : collections.length === 0 ? (
         <CollectionEmpty onExplore={() => navigate("/home")} />
+      ) : (
+        <div className="mt-7 rounded-[24px] border border-border bg-surface p-5 text-center shadow-card">
+          <p className="text-base font-bold text-espresso-900">
+            아직 저장한 카페가 없어요.
+          </p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            마음에 드는 공간을 발견하면 방금 만든 컬렉션에 저장해보세요.
+          </p>
+          <Button className="mt-5" size="lg" onClick={() => navigate("/home")}>
+            카페 둘러보기
+          </Button>
+        </div>
       )}
 
       <BottomSheet

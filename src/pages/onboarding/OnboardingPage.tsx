@@ -42,7 +42,7 @@ export function OnboardingPage() {
     <div className="min-h-screen bg-cream-200">
       <main className="app-container">
         <section className="px-6 pb-32 pt-8">
-          <div className="sticky top-0 z-10 -mx-6 bg-background/95 px-6 pb-4 pt-4 backdrop-blur">
+          <div className="sticky top-0 z-20 -mx-6 bg-background/95 px-6 pb-4 pt-4 backdrop-blur">
             <p className="text-xs font-semibold text-muted-foreground">
               공간 취향 설정
             </p>

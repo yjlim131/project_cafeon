@@ -23,7 +23,7 @@ export function MoodCategoryCard({
       )}
     >
       {selected ? (
-        <span className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-card">
+        <span className="absolute right-3 top-3 z-[1] flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-card">
           <Check size={16} />
         </span>
       ) : null}
